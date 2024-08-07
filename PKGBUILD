@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 _name=flit-core
@@ -43,3 +47,4 @@ package() {
   # remove vendored tomli
   rm -frv "$pkgdir/$site_packages/${_name/-/_}/vendor/"
 }
+
