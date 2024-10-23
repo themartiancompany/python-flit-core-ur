@@ -15,15 +15,17 @@ _pyminver="${_pymajver#*.}"
 _pynextver="${_pymajver%.*}.$(( \
   ${_pyminver} + 1))"
 _pkg=flit-core
+_Pkg=flit_core
 _name="${_pkg}"
 pkgname="${_py}-${_pkg}"
 pkgver=3.9.0
 pkgrel=1
 pkgdesc="A PEP 517 build backend for packages using Flit"
 arch=(any)
-url="https://github.com/pypa/flit/tree/main/flit_core"
+_http="https://github.com"
+_ns="pypa"
+url="${_http}/${_ns}/flit/tree/main/flit_core"
 license=(BSD)
-depends=(python)
 depends=(
   "${_py}>=${_pymajver}"
   "${_py}<${_pynextver}"
@@ -51,7 +53,7 @@ b2sums=(
 
 build() {
   cd \
-    "${_pkg}-${pkgver}"
+    "${_Pkg}-${pkgver}"
   "${_py}" \
     -m \
       build \
@@ -62,7 +64,7 @@ build() {
 
 check() {
   cd \
-    "${_pkg}-${pkgver}"
+    "${_Pkg}-${pkgver}"
   "${_py}" \
   pytest \
     -vv
@@ -76,7 +78,7 @@ package() {
       -c \
         "import site; print(site.getsitepackages()[0])")
   cd \
-    "${_pkg}-${pkgver}"
+    "${_Pkg}-${pkgver}"
   "${_py}" \
     -m \
       installer \
@@ -90,9 +92,9 @@ package() {
   # remove tests
   rm \
     -frv \
-    "$pkgdir/$site_packages/${_name/-/_}/tests/"
+    "${pkgdir}/${site_packages}/${_Pkg}/tests/"
   # remove vendored tomli
   rm \
     -frv \
-    "$pkgdir/$site_packages/${_name/-/_}/vendor/"
+    "${pkgdir}/${site_packages}/${_Pkg}/vendor/"
 }
